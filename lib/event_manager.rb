@@ -28,5 +28,7 @@ begin
   )
   legislators = legislators.officials
 rescue
+  'You can find your representatives by visiting www.commoncause.org/take-action/find-elected-officials'
+end
   puts "#{name} #{zipcode} #{legislators}"
 end
