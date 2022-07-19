@@ -3,6 +3,8 @@ require 'google/apis/civicinfo_v2'
 require 'erb'
 require 'time'
 
+$hour_values = []
+$hour_hash = {}
 
 def time_targeting(regdate)
   year_string = regdate.split('/')[2][0..1].to_s.prepend('20')
@@ -12,10 +14,14 @@ def time_targeting(regdate)
   hour = regdate.split('/')[2].tr(':', ' ')[3..4]
   minutes = regdate.split('/')[2][6..7]
 
-  t = Time.new(year, month, day, hour, minutes)
+  puts time = Time.new(year, month, day, hour, minutes)
 
-  puts t.strftime('this person registered at %H hours')
+  $hour_values.push(hour)
+
+  $hour_hash[hour] = $hour_values.count(hour)
+  puts $hour_hash
 end
+
 
 def clean_zipcode(zipcode)
   zipcode.to_s.rjust(5, '0')[0..4]
@@ -80,7 +86,7 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   puts home_phone = clean_home_phone(row[:homephone])
   legislators = legislators_by_zipcode(zipcode)
-  puts time = time_targeting(row[:regdate])
+  time = time_targeting(row[:regdate])
 
   form_letter = erb_template.result(binding)
 
