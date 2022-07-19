@@ -1,3 +1,5 @@
+template_letter = File.read('form_letter.html')
+
 require 'csv'
 require 'google/apis/civicinfo_v2'
 
