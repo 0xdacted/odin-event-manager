@@ -5,6 +5,8 @@ require 'time'
 
 $hour_values = []
 $hour_hash = {}
+$day_values = []
+$day_hash = {}
 
 def time_targeting(regdate)
   year_string = regdate.split('/')[2][0..1].to_s.prepend('20')
@@ -16,10 +18,15 @@ def time_targeting(regdate)
 
   puts time = Time.new(year, month, day, hour, minutes)
 
+  day_of_week = (time.strftime('%A'))
+  $day_values.push(day_of_week)
+  $day_hash[day_of_week] = $day_values.count(day_of_week)
+
   $hour_values.push(hour)
 
   $hour_hash[hour] = $hour_values.count(hour)
   puts $hour_hash
+  puts $day_hash
 end
 
 
