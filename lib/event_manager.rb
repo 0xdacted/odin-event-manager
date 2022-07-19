@@ -89,10 +89,10 @@ erb_template = ERB.new template_letter
 
 contents.each do |row|
   id = row[0]
-  name = row[:first_name]
-  zipcode = clean_zipcode(row[:zipcode])
+  puts name = row[:first_name]
+  puts zipcode = clean_zipcode(row[:zipcode])
   puts home_phone = clean_home_phone(row[:homephone])
-  legislators = legislators_by_zipcode(zipcode)
+  puts legislators = legislators_by_zipcode(zipcode)
   time = time_targeting(row[:regdate])
 
   form_letter = erb_template.result(binding)
